@@ -1,12 +1,13 @@
 {
-  "name": "electrode-keepalive",
+  "name": "async-keepalive",
   "version": "0.2.1",
-  "description": "electrode-keepalive",
-  "main": "lib/electrode-keepalive.js",
+  "description": "Forked from electrode-keepalive",
+  "main": "dist/electrode-keepalive.js",
+  "typings": "dist/electrode-keepalive.d.ts",
   "scripts": {
-    "prepublish": "which in-publish && if in-publish; then clap test; else echo not in publish; fi",
-    "test": "clap electrode/test",
-    "coverage": "clap electrode/check"
+    "build": "yarn run tsc",
+    "test": "mocha --require ts-node/register `find ./lib -name '*.spec.ts' -print`",
+    "prepublish": "yarn run build"
   },
   "repository": {
     "type": "git",
@@ -20,42 +21,32 @@
   ],
   "contributors": [
     {
+      "name": "Michael Oates",
+      "email": "michael.stephen.oates@gmail.com"
+    },
+    {
       "name": "Jason Wilson",
       "email": "jrwilson@gmail.com"
     }
   ],
   "license": "Apache-2.0",
   "engines": {
-    "node": ">= 4.2.2"
+    "node": ">= 6.0.0"
   },
   "dependencies": {
-    "in-publish": "^2.0.0"
+    "@types/node": "^8.0.24"
   },
   "devDependencies": {
+    "@types/chai": "^4.0.4",
+    "@types/mocha": "^2.2.42",
+    "@types/sinon": "^2.3.3",
+    "@types/superagent": "^3.5.5",
     "bluebird": "^3.4.6",
-    "electrode-archetype-njs-module-dev": "^2.2.0",
+    "chai": "^4.1.1",
+    "mocha": "^3.5.0",
     "sinon": "^1.17.6",
     "superagent": "^2.1.0",
-    "xclap-cli": "^0.1.1"
-  },
-  "nyc": {
-    "all": true,
-    "reporter": [
-      "lcov",
-      "text",
-      "text-summary"
-    ],
-    "exclude": [
-      "coverage",
-      "*clap.js",
-      "gulpfile.js",
-      "dist",
-      "test"
-    ]
-  },
-  "xclap": {
-    "__options": {
-      "npm": true
-    }
+    "ts-node": "^3.3.0",
+    "typescript": "^2.4.2"
   }
 }
